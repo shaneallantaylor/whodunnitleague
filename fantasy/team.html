@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/angular.min.js"></script>
+</head>
+<body>
+  <div ng-app="fantasyApp" ng-controller="fantasyCtrl">
+    <div>
+      <div>
+        <h1>Create Your Fantasy Team</h1>
+        <form>
+          <p>Email: <input type="text" required></input></p>
+          <p>Display Name: <input type="text" required></input></p>
+          <input type="submit" value="Submit"></input>
+        </form>
+      </div>
+      <h2> OR </h2>
+      <div>
+        <h1>Input Your Team ID</h1>
+        <form>
+          <p>ID: <input type="text" required></input></p>
+          <input type="submit" value="Submit"></input>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+  var app = angular.module('fantasyApp', []);
+   app.controller('fantasyCtrl', ['$scope', '$http' function($scope, $http) {
+  }]);
+  </script>
+</body>
+</html>
