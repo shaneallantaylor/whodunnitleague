@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <script src="../js/angular.min.js"></script>
+    <script src="../js/constants.js"></script>
 </head>
 <body>
   <div ng-app="fantasyApp" ng-controller="fantasyCtrl">
     <div>
       <div>
-        <h1>Create Your Fantasy Team</h1>
-        <form>
-          <p>Email: <input type="text" required></input></p>
-          <p>Display Name: <input type="text" required></input></p>
+        <h1>Create Your WDL Fantasy Team</h1>
+        <form ng-submit="createUser(email, displayName)">
+          <p>Email: <input type="email" ng-model="email" required></input></p>
+          <p>Display Name:
+            <input type="text" ng-model="displayName" required></input>
+          </p>
           <input type="submit" value="Submit"></input>
         </form>
       </div>
       <h2> OR </h2>
       <div>
         <h1>Input Your Team ID</h1>
-        <form>
-          <p>ID: <input type="text" required></input></p>
+        <form ng-submit="accessTeam(userId)">
+          <p>ID: <input type="text" ng-model="userId" required></input></p>
           <input type="submit" value="Submit"></input>
         </form>
       </div>
@@ -27,8 +30,24 @@
   </div>
   <script>
   var app = angular.module('fantasyApp', []);
-   app.controller('fantasyCtrl', ['$scope', '$http' function($scope, $http) {
-  }]);
+   app.controller('fantasyCtrl', function($scope, $http) {
+     $scope.createUser = function(email, displayName) {
+       var data = {
+         email: $scope.email,
+         display_name: $scope.displayName
+       }
+       $http.post(apiBaseUrl + '/users/', data).then(function (response) {
+         console.log(response.data);
+       });
+       $scope.email = '';
+       $scope.displayName = '';
+     };
+
+     $scope.accessTeam = function(userId) {
+       console.log('doin the other thing');
+       $scope.userId = '';
+     };
+  });
   </script>
 </body>
 </html>
