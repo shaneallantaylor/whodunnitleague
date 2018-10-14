@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/constants.js"></script>
+    <script>
+    var app = angular.module('teamCreateApp', []);
+    </script>
+    <script src="controllers/teamCreate.js"></script>
+    <script src="directives/uniqueValue.js"></script>
+</head>
+<body>
+  <div ng-app="teamCreateApp" ng-controller="teamCreateCtrl">
+    <div>
+      <div>
+        <h1>Create Your WDL Fantasy Team</h1>
+        <form
+          ng-submit="newUser.$valid && createUser(email, displayName);
+                     newUser.$setPristine()"
+          name="newUser">
+            <p>Email:
+              <input
+                type="email" name="email" ng-model="email"
+                check="checkEmail(value)" required unique-value>
+              </input>
+              <span ng-show="newUser.email.$dirty && newUser.email.$invalid">
+                  Invalid email or email already in use.
+              </span>
+            </p>
+            <p>Display Name:
+              <input
+                type="text" name="displayName" ng-model="displayName"
+                check="checkDisplayName(value)" required unique-value>
+              </input>
+              <span
+                ng-show="newUser.displayName.$dirty && newUser.displayName.$invalid">
+                  Display name invalid or already in use.
+              </span>
+            </p>
+          <input type="submit" value="Submit"></input>
+        </form>
+      </div>
+      <h2> OR </h2>
+      <div>
+        <h1>Input Your Team ID</h1>
+        <form ng-submit="accessTeam(userId)">
+          <p>ID: <input type="text" ng-model="userId" required></input></p>
+          <input type="submit" value="Submit"></input>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
