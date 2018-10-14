@@ -1,12 +1,15 @@
 
 
 app.controller('teamCreateCtrl', function($scope, $http) {
+  $scope.noSuchUser = false;
+
   $scope.createUser = function(email, displayName) {
     var data = {
       email: email,
       display_name: displayName
     }
     $http.post(apiBaseUrl + '/users/', data).then(function (response) {
+      window.location = './team.html?id=' + response.data._id;
       console.log(response.data);
     });
     $scope.email = '';
@@ -22,6 +25,11 @@ app.controller('teamCreateCtrl', function($scope, $http) {
       method: 'GET',
       params: data
     }).then(function(response) {
+      if (!angular.equals(response.data, {})) {
+        window.location = './team.html?id=' + response.data._id;
+      } else {
+        $scope.noSuchUser = true;
+      }
        console.log(response.data);
      });
     $scope.userId = '';

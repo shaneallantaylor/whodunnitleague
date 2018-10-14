@@ -45,7 +45,10 @@
       <div>
         <h1>Input Your Team ID</h1>
         <form ng-submit="accessTeam(userId)">
-          <p>ID: <input type="text" ng-model="userId" required></input></p>
+          <p>
+            ID: <input type="text" ng-model="userId" required></input>
+            <span ng-show="noSuchUser">No such user.</span>
+          </p>
           <input type="submit" value="Submit"></input>
         </form>
       </div>

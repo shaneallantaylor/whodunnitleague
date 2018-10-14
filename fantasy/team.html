@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/constants.js"></script>
+    <script>
+    var app = angular.module('teamApp', []);
+    app.controller('teamCtrl', function($scope, $http) {
+      $scope.userId = new URL(window.location).searchParams.get('id');
+      $scope.location = window.location;
+      $scope.displayName = '';
+      $scope.email = '';
+
+      $scope.getTeam = function() {
+        var data = {
+          id: $scope.userId
+        }
+        $http({
+          url: apiBaseUrl + '/users',
+          method: 'GET',
+          params: data
+        }).then(function(response) {
+          if (!angular.equals(response.data, {})) {
+            $scope.displayName = response.data.display_name;
+            $scope.email = response.data.email;
+          } else {
+            $scope.noSuchUser = true;
+          }
+           console.log(response.data);
+         });
+      };
+
+      $scope.getTeam();
+    });
+    </script>
+</head>
+<body>
+  <div ng-app="teamApp" ng-controller="teamCtrl">
+    <div ng-show="!noSuchUser">
+      <h1> Welcome, {{displayName}}!</h1>
+      <p>Your User Id is: {{userId}}</p>
+      <p>Your link is: {{location}}</p>
+      <p>You email is: {{email}}</p>
+    </div>
+    <div ng-show="noSuchUser">
+      <h3>The user id: <h3>
+      <p>{{userId}}</p>
+      <h3>does not correspond to any existing users.</h3>        
+  </div>
+</body>
+</html>
