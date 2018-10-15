@@ -9,6 +9,10 @@
     </script>
     <script src="controllers/teamCreate.js"></script>
     <script src="directives/uniqueValue.js"></script>
+
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/home.css">
 </head>
 <body>
   <div ng-app="teamCreateApp" ng-controller="teamCreateCtrl">
@@ -16,8 +20,7 @@
       <div>
         <h1>Create Your WDL Fantasy Team</h1>
         <form
-          ng-submit="newUser.$valid && createUser(email, displayName);
-                     newUser.$setPristine()"
+          ng-submit="newUser.$valid && createUser(email, displayName)"
           name="newUser">
             <p>Email:
               <input

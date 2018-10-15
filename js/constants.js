@@ -1,1 +1,1 @@
-const apiBaseUrl = 'http://localhost:5000'
+const apiBaseUrl = 'https://wdl-api.herokuapp.com'
